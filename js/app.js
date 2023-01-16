@@ -10,6 +10,12 @@ function eventListeners(){
      listaCursos.addEventListener('click', agregarCurso);
 
      carrito.addEventListener('click', eliminarCurso);
+
+     vaciarCarritoBtn.addEventListener('click', () => {
+          articulosCarrito = [];
+
+          limpiarHTML();
+     })
 }
 
 
