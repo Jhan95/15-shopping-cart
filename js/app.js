@@ -8,6 +8,8 @@ let articulosCarrito = [];
 eventListeners();
 function eventListeners(){
      listaCursos.addEventListener('click', agregarCurso);
+
+     carrito.addEventListener('click', eliminarCurso);
 }
 
 
@@ -21,6 +23,13 @@ function agregarCurso(e){
      }
 }
 
+function eliminarCurso(e){
+     if(e.target.classList.contains('borrar-curso')){
+          console.log(e.target.getAttribute('data-id'));
+     }
+}
+
+
 function leerDatosCursos(curso){
 
      const infoCurso = {
@@ -32,7 +41,6 @@ function leerDatosCursos(curso){
      }
 
      const existe = articulosCarrito.some( curso => curso.id === infoCurso.id);
-     console.log(existe);
      if(existe){
           const cursos = articulosCarrito.map( curso => {
                if (curso.id === infoCurso.id){
