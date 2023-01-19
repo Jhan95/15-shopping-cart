@@ -5,7 +5,6 @@ const listaCursos = document.querySelector('#lista-cursos');
 
 let articulosCarrito = [];
 
-
 eventListeners();
 function eventListeners(){
      listaCursos.addEventListener('click', agregrarCurso);
