@@ -7,22 +7,40 @@ let articulosCarrito = [];
 
 eventListeners();
 function eventListeners(){
-     listaCursos.addEventListener('click', agregrarCurso);
+     listaCursos.addEventListener('click', agregarCurso);
+
+     carrito.addEventListener('click', eliminarCurso);
+
+     vaciarCarritoBtn.addEventListener('click', () => {
+          articulosCarrito = [];
+
+          limpiarHTML();
+     })
 }
 
-
-function agregrarCurso(e){
+function agregarCurso(e) {
      e.preventDefault();
+
      if(e.target.classList.contains('agregar-carrito')){
           const cursoSeleccionado = e.target.parentElement.parentElement;
 
           leerDatosCurso(cursoSeleccionado);
      }
+
+}
+
+function eliminarCurso(e){
+
+     if(e.target.classList.contains('borrar-curso')){
+          const cursoId = e.target.getAttribute('data-id');
+
+          articulosCarrito = articulosCarrito.filter( curso => curso.id !== cursoId);
+
+          carritoHTML();
+     }
 }
 
 function leerDatosCurso(curso){
-
-     console.log(curso);
 
      const infoCurso = {
           imagen: curso.querySelector('img').src,
@@ -33,27 +51,23 @@ function leerDatosCurso(curso){
      }
 
      const existe = articulosCarrito.some( curso => curso.id === infoCurso.id);
-
      if(existe){
           const cursos = articulosCarrito.map( curso => {
-               if(curso.id === infoCurso.id){
+
+               if( curso.id === infoCurso.id){
                     curso.cantidad++;
+                    return curso;
                } else{
                     return curso;
                }
           });
-          articulosCarrito = [...cursos];
-     }else{
+          articulosCarrito = [...cursos]
+     } else{
           articulosCarrito = [...articulosCarrito, infoCurso];
      }
 
-
-
-     console.log(articulosCarrito);
-
      carritoHTML();
 }
-
 
 function carritoHTML(){
 
@@ -61,18 +75,18 @@ function carritoHTML(){
 
      articulosCarrito.forEach( curso => {
 
-          const { imagen, titulo, precio, cantidad, id} = curso;
+          const {imagen, titulo, precio, cantidad, id} = curso;
           const row = document.createElement('tr');
           row.innerHTML = `
           <td><img src="${imagen}" width="100"></td>
           <td>${titulo}</td>
           <td>${precio}</td>
           <td>${cantidad}</td>
-          <td><a href="#" class="borrar-curso" data-id="${id}"> X </a></td>
-          `;
+          <td><a href="#" class="borrar-curso" data-id="${id}"> X <a/></td>
+          `
 
           contenedorCarrito.appendChild(row);
-     });
+     })
 }
 
 function limpiarHTML(){
