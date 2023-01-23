@@ -28,6 +28,7 @@ function agregarCurso(e){
 }
 
 function eliminarCurso(e){
+
      if(e.target.classList.contains('borrar-curso')){
           const cursoId = e.target.getAttribute('data-id');
 
@@ -47,7 +48,7 @@ function leerDatosCurso(curso){
           cantidad: 1,
      }
 
-     const existe = articulosCarrito.some( curso => curso.id === infoCurso.id)
+     const existe = articulosCarrito.some( curso => curso.id === infoCurso.id);
      if(existe){
           const cursos = articulosCarrito.map( curso => {
                if(curso.id === infoCurso.id){
@@ -57,12 +58,14 @@ function leerDatosCurso(curso){
                     return curso;
                }
           });
-          articulosCarrito = [...cursos];
+          articulosCarrito = [...cursos]
      } else{
           articulosCarrito = [...articulosCarrito, infoCurso];
      }
 
      carritoHTML();
+
+     console.log(articulosCarrito);
 }
 
 function carritoHTML(){
@@ -71,7 +74,7 @@ function carritoHTML(){
 
      articulosCarrito.forEach( curso => {
 
-          const {imagen, titulo, precio, id, cantidad} = curso;
+          const { imagen, titulo, precio, id, cantidad} = curso;
           const row = document.createElement('tr');
           row.innerHTML = `
           <td><img src="${imagen}" width="100"></td>
@@ -80,7 +83,7 @@ function carritoHTML(){
           <td>${cantidad}</td>
           <td><a href="#" class="borrar-curso" data-id="${id}"> X <a/></td>
           `
-          contenedorCarrito.appendChild(row)
+          contenedorCarrito.appendChild(row);
      });
 }
 
@@ -90,3 +93,5 @@ function limpiarHTML(){
           contenedorCarrito.removeChild(contenedorCarrito.firstChild);
      }
 }
+
+//Primes vez creando el codigo por mi cuenta
