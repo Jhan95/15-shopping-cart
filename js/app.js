@@ -18,19 +18,16 @@ function eventListeners(){
      })
 }
 
-function agregarCurso(e) {
+function agregarCurso(e){
      e.preventDefault();
-
      if(e.target.classList.contains('agregar-carrito')){
           const cursoSeleccionado = e.target.parentElement.parentElement;
 
           leerDatosCurso(cursoSeleccionado);
      }
-
 }
 
 function eliminarCurso(e){
-
      if(e.target.classList.contains('borrar-curso')){
           const cursoId = e.target.getAttribute('data-id');
 
@@ -50,18 +47,17 @@ function leerDatosCurso(curso){
           cantidad: 1,
      }
 
-     const existe = articulosCarrito.some( curso => curso.id === infoCurso.id);
+     const existe = articulosCarrito.some( curso => curso.id === infoCurso.id)
      if(existe){
           const cursos = articulosCarrito.map( curso => {
-
-               if( curso.id === infoCurso.id){
+               if(curso.id === infoCurso.id){
                     curso.cantidad++;
                     return curso;
                } else{
                     return curso;
                }
           });
-          articulosCarrito = [...cursos]
+          articulosCarrito = [...cursos];
      } else{
           articulosCarrito = [...articulosCarrito, infoCurso];
      }
@@ -75,7 +71,7 @@ function carritoHTML(){
 
      articulosCarrito.forEach( curso => {
 
-          const {imagen, titulo, precio, cantidad, id} = curso;
+          const {imagen, titulo, precio, id, cantidad} = curso;
           const row = document.createElement('tr');
           row.innerHTML = `
           <td><img src="${imagen}" width="100"></td>
@@ -84,9 +80,8 @@ function carritoHTML(){
           <td>${cantidad}</td>
           <td><a href="#" class="borrar-curso" data-id="${id}"> X <a/></td>
           `
-
-          contenedorCarrito.appendChild(row);
-     })
+          contenedorCarrito.appendChild(row)
+     });
 }
 
 function limpiarHTML(){
